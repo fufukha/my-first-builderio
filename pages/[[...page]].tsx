@@ -6,10 +6,6 @@ import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
 import { getAllPages, getModelContent, GetContentOptions } from '@/api/builder';
 import { Model } from 'utils/constants';
-import CustomHead from '@/layouts/CustomHead'
-import MainHeader from '@/layouts/MainHeader/MainHeader'
-import MainFooter from '@/layouts/MainFooter/MainFooter'
-import { BuilderComponent } from '@builder.io/react'
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 
 

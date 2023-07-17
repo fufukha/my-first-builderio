@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomHead, { CustomHeadProps} from '../CustomHead'
+import CustomHead from '../CustomHead'
 import MainHeader from '../MainHeader/MainHeader'
 import MainFooter from '../MainFooter/MainFooter'
 import { BuilderComponent } from '@builder.io/react'
