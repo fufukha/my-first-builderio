@@ -6,20 +6,25 @@ import { BuilderComponent } from '@builder.io/react'
 import { BuilderContent } from "@builder.io/sdk";
 import { Model } from '@/utils/constants'
 
-interface MainLayoutProps extends CustomHeadProps {
-	page?: BuilderContent | null
+interface PageDataFields {
+	title?: string;
+	description?: string;
+}
+interface PageBuilderContent extends BuilderContent {
+	data?: BuilderContent['data'] & PageDataFields
+}
+interface MainLayoutProps {
+	page?: PageBuilderContent | null
 	announcement?: BuilderContent | null
 }
 
 export default function MainLayout({
-	title,
-	description,
 	announcement,
 	page,
 }: MainLayoutProps) {
 	return (
 		<>
-			<CustomHead title={title} description={description} />
+			<CustomHead title={page?.data?.title} description={page?.data?.description} />
 			{announcement &&
 				<BuilderComponent model={Model.Announcement} content={announcement} />
 			}

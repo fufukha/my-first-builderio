@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 export interface CustomHeadProps {
-	title: string;
+	title?: string;
 	description?: string;
 }
 
