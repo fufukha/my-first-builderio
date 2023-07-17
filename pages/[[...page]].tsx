@@ -1,11 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { builder, useIsPreviewing } from "@builder.io/react";
-import { BuilderContent } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
-import { getAllPages, getContentModel, GetContentOptions } from '@/api/builder';
-import { Model } from 'utils/constants';
+import { getAllContentModel, getAllPages, getContentModel, GetContentOptions } from '@/api/builder';
+import { Model, GenericBuilderContent, PageBuilderContent, NavLinkBuilderContent } from '@/types';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 
 
@@ -20,12 +19,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const page = params?.page ? await getContentModel(Model.Page, options) : null
   const announcement = params?.page ? await getContentModel(Model.Announcement, options) : null
+  const navLinks = getAllContentModel(Model.NavLink)
 
   // Return the page content as props
   return {
     props: {
-      page: page || null,
-      announcement: announcement || null,
+      page: page || undefined,
+      announcement: announcement || undefined,
       params: params
     },
     // Revalidate the content every 5 seconds
@@ -45,14 +45,18 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
-interface PageProps {
-  page: BuilderContent | null,
-  announcement: BuilderContent | null,
+
+
+export interface PageProps {
+  page?: PageBuilderContent,
+  announcement?: GenericBuilderContent,
+  navLinks?: NavLinkBuilderContent,
   params: any
 }
 export default function Page({
   page,
   announcement,
+  navLinks,
   params
 }: PageProps) {
   const router = useRouter();
@@ -69,25 +73,11 @@ export default function Page({
     return <DefaultErrorPage statusCode={404} />;
   }
 
-  // If the page content is available, render
-  // the BuilderComponent with the page content
-  // return (
-  //   <>
-  //     <CustomHead title={page?.data?.title} description={page?.data?.description} />
-  //     {announcement &&
-  //       <BuilderComponent model={Model.Announcement} content={announcement} />
-  //     }
-  //     {/* <MainHeader /> */}
-  //     {page &&
-  //       <BuilderComponent model={Model.Page} content={page || undefined} />
-  //     }
-  //     <MainFooter />
-  //   </>
-  // );
   return (
     <MainLayout
       page={page}
       announcement={announcement}
+      navLinks={navLinks}
     />
   )
 }

@@ -1,11 +1,11 @@
-import { Model } from '@/utils/constants';
+import { Model } from '@/types';
 import { builder, Builder } from "@builder.io/react";
 
 export type GetContentOptions = Parameters<Builder['get']>[1];
 
 export const getContentModel = async (
 	modelName: string,
-	options: GetContentOptions,
+	options?: GetContentOptions,
 	url?: string[],
 ) => {
 	const urlPath = url ?  '/' + (url?.join('/') || '') : undefined;
@@ -23,7 +23,7 @@ export const getContentModel = async (
 
 export const getAllContentModel = async (
 	modelName: string,
-	options: GetContentOptions
+	options?: GetContentOptions
 ) => {
 	const allModels = await builder.getAll(
 		modelName,

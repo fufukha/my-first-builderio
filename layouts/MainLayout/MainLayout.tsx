@@ -4,19 +4,10 @@ import MainHeader from '../MainHeader/MainHeader'
 import MainFooter from '../MainFooter/MainFooter'
 import { BuilderComponent } from '@builder.io/react'
 import { BuilderContent } from "@builder.io/sdk";
-import { Model } from '@/utils/constants'
+import { PageProps } from '@/pages/[[...page]]'
+import { Model } from '@/types'
 
-interface PageDataFields {
-	title?: string;
-	description?: string;
-}
-interface PageBuilderContent extends BuilderContent {
-	data?: BuilderContent['data'] & PageDataFields
-}
-interface MainLayoutProps {
-	page?: PageBuilderContent | null
-	announcement?: BuilderContent | null
-}
+interface MainLayoutProps extends Omit<PageProps, 'params'> {}
 
 export default function MainLayout({
 	announcement,
