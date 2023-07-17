@@ -1,19 +1,27 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
+import { builder, useIsPreviewing } from "@builder.io/react";
 import { BuilderContent } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
-import Head from "next/head";
 import { GetStaticProps } from "next";
 import MainLayout from '@/layouts/MainLayout/MainLayout';
+import { getAllPages, getModelContent, getPageContent, GetContentOptions } from '@/api/builder';
+import { Model } from '@/utils/constants';
 
-// Replace with your Public API Key
-builder.init(process.env.BUILDER_API_KEY as string);
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY as string);
 
-export default function Page({ page, params }: { page: BuilderContent | null, params: any }) {
+interface PageProps {
+  page: BuilderContent | null,
+  announcement: BuilderContent | null,
+  params: any
+}
+export default function Page({
+  page,
+  announcement,
+  params
+}: PageProps) {
   const router = useRouter();
   const isPreviewing = useIsPreviewing();
-  console.log(isPreviewing)
   // If the page content is not available
   // and not in preview mode, show a 404 error page
   if (router.isFallback) {
@@ -33,6 +41,7 @@ export default function Page({ page, params }: { page: BuilderContent | null, pa
       title={page?.data?.title}
       description={page?.data?.description}
       page={page}
+      announcement={announcement}
     />
   );
 }
@@ -41,19 +50,18 @@ export default function Page({ page, params }: { page: BuilderContent | null, pa
 // Define a function that fetches the Builder
 // content for a given page
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const urlPath = '/' + ((params?.page as string[]).join('/') || '');
+  const options: GetContentOptions = { userAttributes: { urlPath }}
+  
   // Fetch the builder content for the given page
-  const page = await builder
-    .get("page", {
-      userAttributes: {
-        urlPath: "/" + ((params?.page as string[])?.join("/") || ""),
-      },
-    })
-    .toPromise();
+  const page = params?.page ? await getModelContent(Model.Page, options) : null
+  const announcement = params?.page ? await getModelContent(Model.Announcement, options) : null
 
   // Return the page content as props
   return {
     props: {
       page: page || null,
+      announcement: announcement || null,
       params: params
     },
     // Revalidate the content every 5 seconds
@@ -65,11 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 // static paths for all pages in Builder
 export async function getStaticPaths() {
   // Get a list of all pages in Builder
-  const pages = await builder.getAll("page", {
-    // We only need the URL field
-    fields: "data.url",
-    options: { noTargeting: true },
-  });
+  const pages = await getAllPages();
 
   // Generate the static paths for all pages in Builder
   return {
