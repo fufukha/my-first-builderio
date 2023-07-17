@@ -3,9 +3,9 @@ import { builder, Builder } from "@builder.io/react";
 
 export type GetContentOptions = Parameters<Builder['get']>[1];
 
-export const getModelContent = async (
-	modelName: Parameters<Builder['get']>[0],
-	options: Parameters<Builder['get']>[1],
+export const getContentModel = async (
+	modelName: string,
+	options: GetContentOptions,
 	url?: string[],
 ) => {
 	const urlPath = url ?  '/' + (url?.join('/') || '') : undefined;
@@ -21,7 +21,19 @@ export const getModelContent = async (
 	return model;
 }
 
-export const getPageContent = async (
+export const getAllContentModel = async (
+	modelName: string,
+	options: GetContentOptions
+) => {
+	const allModels = await builder.getAll(
+		modelName,
+		options
+	)
+
+	return allModels
+}
+
+export const getPageModel = async (
 	urls: string[],
 ) => {
 	const pageContent = await builder

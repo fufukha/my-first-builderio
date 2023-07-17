@@ -4,7 +4,7 @@ import { builder, useIsPreviewing } from "@builder.io/react";
 import { BuilderContent } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
-import { getAllPages, getModelContent, GetContentOptions } from '@/api/builder';
+import { getAllPages, getContentModel, GetContentOptions } from '@/api/builder';
 import { Model } from 'utils/constants';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 
@@ -18,8 +18,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const options: GetContentOptions = { userAttributes: { urlPath }}
   
   // Fetch the builder content for the given page
-  const page = params?.page ? await getModelContent(Model.Page, options) : null
-  const announcement = params?.page ? await getModelContent(Model.Announcement, options) : null
+  const page = params?.page ? await getContentModel(Model.Page, options) : null
+  const announcement = params?.page ? await getContentModel(Model.Announcement, options) : null
 
   // Return the page content as props
   return {
