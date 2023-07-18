@@ -13,6 +13,7 @@ export const getContentModel = async (
 	const model = await builder.get(
 		modelName,
 		{
+			includeRefs: true,
 			...options,
 			...url && {userAttributes: { urlPath }}
 		}
@@ -48,7 +49,7 @@ export const getPageModel = async (
 }
 
 export const getAllPages = async () => {
-	const pages = await builder.getAll(Model.Page, {
+	const pages = await getAllContentModel(Model.Page, {
 		// We only need the URL field
 		fields: "data.url",
 		options: { noTargeting: true },

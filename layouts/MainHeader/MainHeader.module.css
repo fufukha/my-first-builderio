@@ -1,7 +1,22 @@
 .header {
-	@apply relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start;
+	@apply relative flex w-full items-center justify-between bg-white py-4 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start;
 }
 
 .headerWrapper {
-	@apply flex w-full flex-wrap items-center justify-between px-3;
+	@apply flex flex-wrap items-center justify-between px-3 text-lg font-semibold;
+}
+
+.header h1 {
+	@apply text-lg;
+}
+.headerNav{
+	@apply ml-7;
+}
+
+.headerNavUl {
+	@apply flex max-w-7xl items-center justify-between;
+}
+
+.headerNavUl > * {
+	@apply mx-3;
 }

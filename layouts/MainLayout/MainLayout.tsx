@@ -3,13 +3,17 @@ import CustomHead from '../CustomHead'
 import MainHeader from '../MainHeader/MainHeader'
 import MainFooter from '../MainFooter/MainFooter'
 import { BuilderComponent } from '@builder.io/react'
-import { BuilderContent } from "@builder.io/sdk";
 import { PageProps } from '@/pages/[[...page]]'
 import { Model } from '@/types'
 
-interface MainLayoutProps extends Omit<PageProps, 'params'> {}
+export interface MainLayoutProps {
+	navLinks: PageProps['navLinks'];
+	announcement: PageProps['announcement'];
+	page: PageProps['page'];
+}
 
 export default function MainLayout({
+	navLinks,
 	announcement,
 	page,
 }: MainLayoutProps) {
@@ -19,11 +23,11 @@ export default function MainLayout({
 			{announcement &&
 				<BuilderComponent model={Model.Announcement} content={announcement} />
 			}
-			<MainHeader />
+			<MainHeader navLinks={navLinks} />
 			{page &&
 				<BuilderComponent model={Model.Page} content={page || undefined} />
 			}
-			<MainFooter />
+			{/* <MainFooter /> */}
 		</>
 	)
 }

@@ -3,7 +3,8 @@ import { BuilderContent } from "@builder.io/sdk";
 export enum Model {
 	Page = 'page',
 	Announcement = 'announcement-bar',
-	NavLink = 'nav-link'
+	NavLink = 'nav-link',
+	Symbol = 'symbol'
 }
 
 export type GenericBuilderContent = BuilderContent 
@@ -14,7 +15,10 @@ interface PageDataFields {
 }
 
 interface NavLinkDataFields {
-
+	label: string;
+	url: string;
+	behavior: '_self' | '_blank';
+	externalLink: boolean;
 }
 
 export interface NavLinkBuilderContent extends BuilderContent {

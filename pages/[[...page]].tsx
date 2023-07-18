@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { builder, useIsPreviewing } from "@builder.io/react";
+import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
 import { getAllContentModel, getAllPages, getContentModel, GetContentOptions } from '@/api/builder';
@@ -19,17 +19,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const page = params?.page ? await getContentModel(Model.Page, options) : null
   const announcement = params?.page ? await getContentModel(Model.Announcement, options) : null
-  const navLinks = getAllContentModel(Model.NavLink)
+  const navLinks = await getAllContentModel(Model.NavLink)
 
   // Return the page content as props
   return {
     props: {
-      page: page || undefined,
+      page: page || null,
       announcement: announcement || undefined,
+      navLinks: navLinks || undefined,
       params: params
     },
     // Revalidate the content every 5 seconds
-    revalidate: 5,
+    // revalidate: 5,
   };
 };
 
@@ -50,7 +51,7 @@ export async function getStaticPaths() {
 export interface PageProps {
   page?: PageBuilderContent,
   announcement?: GenericBuilderContent,
-  navLinks?: NavLinkBuilderContent,
+  navLinks?: NavLinkBuilderContent[],
   params: any
 }
 export default function Page({
