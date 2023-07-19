@@ -1,5 +1,5 @@
 .header {
-	@apply relative flex w-full items-center justify-between bg-primary py-4 text-secondaryText md:flex-wrap md:justify-start;
+	@apply relative flex w-full items-center justify-between bg-secondary py-4 text-secondaryText md:flex-wrap md:justify-start;
 }
 
 .headerWrapper {

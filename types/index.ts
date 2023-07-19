@@ -4,7 +4,8 @@ export enum Model {
 	Page = 'page',
 	Announcement = 'announcement-bar',
 	NavLink = 'nav-link',
-	Symbol = 'symbol'
+	Symbol = 'symbol',
+	Navigation = 'navigation-links'
 }
 
 export type GenericBuilderContent = BuilderContent 
@@ -21,6 +22,21 @@ interface NavLinkDataFields {
 	externalLink: boolean;
 }
 
+interface NavigationLink {
+	image: string;
+	label: string;
+	url: string;
+	behavior: '_self' | '_blank',
+	externalLink: boolean;
+	children: NavigationLinkBuilderContent;
+}
+interface NavigationLinksDataFields {
+	links: NavigationLink[]
+}
+
+export interface NavigationLinkBuilderContent extends BuilderContent {
+	data?: BuilderContent['data'] & NavigationLinksDataFields;
+}
 export interface NavLinkBuilderContent extends BuilderContent {
   data?: BuilderContent['data'] & NavLinkDataFields
 }
@@ -28,3 +44,6 @@ export interface NavLinkBuilderContent extends BuilderContent {
 export interface PageBuilderContent extends BuilderContent {
 	data?: BuilderContent['data'] & PageDataFields
 }
+
+export const theme = ['primary', 'secondary', 'tertiary', 'accent'] as const
+export type Theme = typeof theme[number]

@@ -1,0 +1,20 @@
+.primary {
+	@apply bg-primary text-primaryText;
+}
+
+.secondary {
+	@apply bg-secondary text-secondaryText;
+}
+
+
+.hero-container {
+	@apply max-w-7xl mx-auto px-4 flex flex-col gap-10 justify-center items-center py-20 min-h-fit h-screen max-h-[800px];
+}
+
+.hero-title {
+	@apply text-8xl lowercase font-bold;
+}
+
+.hero-description {
+	@apply text-lg uppercase;
+}

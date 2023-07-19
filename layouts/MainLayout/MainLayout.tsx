@@ -25,7 +25,7 @@ export default function MainLayout({
 			}
 			<MainHeader navLinks={navLinks} />
 			{page &&
-				<BuilderComponent model={Model.Page} content={page || undefined} />
+				<BuilderComponent model={Model.Page} content={page || undefined} options={{includeRefs: true}} />
 			}
 			{/* <MainFooter /> */}
 		</>

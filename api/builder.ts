@@ -6,17 +6,17 @@ export type GetContentOptions = Parameters<Builder['get']>[1];
 export const getContentModel = async (
 	modelName: string,
 	options?: GetContentOptions,
-	url?: string[],
+	// url?: string[],
 ) => {
-	const urlPath = url ?  '/' + (url?.join('/') || '') : undefined;
+	// const urlPath = url ?  '/' + (url?.join('/') || '') : undefined;
 
 	const model = await builder.get(
 		modelName,
-		{
-			includeRefs: true,
-			...options,
-			...url && {userAttributes: { urlPath }}
-		}
+		options,
+		// {
+		// 	...options,
+		// 	// ...url && {userAttributes: { urlPath }}
+		// }
 	).toPromise();
 
 	return model;

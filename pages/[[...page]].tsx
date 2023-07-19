@@ -1,11 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
+import { builder, useIsPreviewing } from "@builder.io/react";
 import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
 import { getAllContentModel, getAllPages, getContentModel, GetContentOptions } from '@/api/builder';
-import { Model, GenericBuilderContent, PageBuilderContent, NavLinkBuilderContent } from '@/types';
+import { Model, PageBuilderContent, NavLinkBuilderContent, GenericBuilderContent } from '@/types';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
+import '@/builder-registry';
 
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY as string);
@@ -18,19 +19,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   
   // Fetch the builder content for the given page
   const page = params?.page ? await getContentModel(Model.Page, options) : null
-  const announcement = params?.page ? await getContentModel(Model.Announcement, options) : null
+  const announcement = await builder.get(Model.Announcement).toPromise() || null
   const navLinks = await getAllContentModel(Model.NavLink)
 
   // Return the page content as props
   return {
     props: {
       page: page || null,
-      announcement: announcement || undefined,
-      navLinks: navLinks || undefined,
+      announcement: announcement || null,
+      navLinks: navLinks || null,
       params: params
     },
     // Revalidate the content every 5 seconds
-    // revalidate: 5,
+    revalidate: 5,
   };
 };
 

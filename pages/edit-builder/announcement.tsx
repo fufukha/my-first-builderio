@@ -5,7 +5,6 @@ import { GetStaticProps } from "next";
 import { getAllContentModel } from '@/api/builder';
 import { Model, GenericBuilderContent} from '@/types';
 
-
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY as string);
 
 // Define a function that fetches the Builder
@@ -35,6 +34,7 @@ export default function EditAnnouncementPage({
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
+
 
   return (
     <>
