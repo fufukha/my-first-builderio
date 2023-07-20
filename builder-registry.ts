@@ -25,24 +25,47 @@ Builder.registerComponent(
   {
     name: 'ContentSection',
     inputs: [
+			{
+				name: 'title',
+				type: 'blocks', // Specify type of blocks
+				hideFromUI: true,
+				helperText: 'This is an editable region.',
+				defaultValue: [
+					{
+						'@type': '@builder.io/sdk:Element',
+							component: {
+								name: 'Text',
+								options: {
+									text: 'Edit title...',
+							},
+						},
+						responsiveStyles: {
+							large: {
+								// Styles for the editable section
+							},
+						},
+					},
+				],
+			},
 			{name: 'description', type: 'text', defaultValue: 'Edit Descriptions'},
 			{name: 'theme', type: 'text', enum: theme as unknown as string[], defaultValue: theme[0]}
 		],
 		defaultStyles: {
 			margin: '0',
 		},
-		defaultChildren: [
-			{
-				'@type': '@builder.io/sdk:Element',
-				component: {
-					name: 'Text',
-					options: {
-						text: 'I am a default child!',
-					},
-				},
-			}
-		],
-		canHaveChildren: true,
+		noWrap: true,
+		// defaultChildren: [
+		// 	{
+		// 		'@type': '@builder.io/sdk:Element',
+		// 		component: {
+		// 			name: 'Text',
+		// 			options: {
+		// 				text: 'I am a default child!',
+		// 			},
+		// 		},
+		// 	}
+		// ],
+		canHaveChildren: false,
     image: 'https://tabler-icons.io/static/tabler-icons/icons-png/new-section.png'
   }
 )

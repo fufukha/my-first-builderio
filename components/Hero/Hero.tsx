@@ -14,7 +14,7 @@ export default function Hero({
 	theme = 'primary',
 }: HeroProps) {
 	return (
-		<section className={getThemeClasses(theme)}>
+		<section className={getThemeClasses(theme).theme}>
 			<div className={styles['hero-container']}>
 				<h2 className={styles['hero-title']}>{title}</h2>
 				{description &&

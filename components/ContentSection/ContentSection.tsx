@@ -1,29 +1,29 @@
 import React from 'react'
 import styles from './ContentSection.module.css'
 import { CustomBuilderComponent, Theme } from '@/types';
-import { getBuildChild, getThemeClasses } from '@/utils';
-import {BuilderBlocks, withChildren } from '@builder.io/react';
-
+import { getThemeClasses } from '@/utils';
+import {BuilderBlocks, BuilderElement, withChildren } from '@builder.io/react';
 
 interface ContentSectionProps extends CustomBuilderComponent {
-	title: string;
+	title: BuilderElement[];
 	description?: string;
 	theme?: Theme;
 }
 export default function ContentSection({
 	description,
-	theme,
-	builderBlock
+	theme = 'primary',
+	title,
+	builderBlock,
 }
 : ContentSectionProps) {
 	return (
-		<section className={theme ? getThemeClasses(theme) : undefined}>
+		<section className={theme ? getThemeClasses(theme).theme : undefined}>
 			<div className={styles['contentSection-container']}>
 				<div className={styles['contentSection-title']}>
-						<BuilderBlocks
-							blocks={builderBlock.children}
+					<BuilderBlocks
+							blocks={title}
 							parentElementId={builderBlock.id}
-							dataPath="this.children"
+							dataPath="component.options.title"
 						/>
 					</div>
 				{description &&

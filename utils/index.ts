@@ -9,14 +9,16 @@ export const getTextTheme = (theme: Theme) => {
 }
 
 export const getThemeClasses = (theme: Theme) => {
-	return cn({
-		'text-primaryText': theme === 'secondary',
-		'text-secondaryText': theme !== 'secondary',
-		'bg-primary': theme === 'primary',
-		'bg-secondary': theme === 'secondary',
-		'bg-tertiary': theme === 'tertiary',
-		'bg-accent': theme === 'accent',
-	})
+	return ( 
+		{
+			theme: cn({
+				'text-primaryText bg-secondary': theme === 'secondary',
+				'bg-primary text-secondaryText': theme === 'primary',
+				'bg-tertiary text-secondaryText': theme === 'tertiary',
+				'bg-accent text-secondaryText': theme === 'accent',
+			})
+		}
+	)
 }
 
 export const getBuildChild = (children: BuilderElement[], tag: string) => {
