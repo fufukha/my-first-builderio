@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './Hero.module.css'
-import cn from 'classnames'
-import { Theme } from '@/types';
+import { CustomBuilderComponent, Theme } from '@/types';
 import { getThemeClasses } from '@/utils';
-interface HeroProps {
+
+interface HeroProps extends CustomBuilderComponent {
 	title: string;
 	description?: string;
-	theme?: Theme
+	theme?: Theme;
 }
 export default function Hero({
 	title,

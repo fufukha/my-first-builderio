@@ -1,4 +1,5 @@
-import { Theme } from '@/types'
+import { BuilderChild, Theme } from '@/types'
+import { Builder, BuilderBlocks, BuilderElement } from '@builder.io/react'
 import cn from 'classnames'
 
 export const getTextTheme = (theme: Theme) => {
@@ -16,4 +17,9 @@ export const getThemeClasses = (theme: Theme) => {
 		'bg-tertiary': theme === 'tertiary',
 		'bg-accent': theme === 'accent',
 	})
+}
+
+export const getBuildChild = (children: BuilderElement[], tag: string) => {
+	const child = children?.find((child) => child?.component?.tag === tag);
+	return child
 }

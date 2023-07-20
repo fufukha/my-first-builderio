@@ -1,4 +1,5 @@
-import { BuilderContent } from "@builder.io/sdk";
+import { BuilderStore } from '@builder.io/react';
+import { BuilderContent, BuilderElement } from "@builder.io/sdk";
 
 export enum Model {
 	Page = 'page',
@@ -47,3 +48,16 @@ export interface PageBuilderContent extends BuilderContent {
 
 export const theme = ['primary', 'secondary', 'tertiary', 'accent'] as const
 export type Theme = typeof theme[number]
+
+export interface BuilderChild {
+	readonly $$typeof: string;
+	readonly key: string;
+	props: {
+		block: BuilderElement;
+	}
+}
+
+export interface CustomBuilderComponent {
+	builderBlock: BuilderElement;
+	builderState: BuilderStore;
+}
