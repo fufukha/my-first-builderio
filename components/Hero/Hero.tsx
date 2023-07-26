@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './Hero.module.css'
 import { CustomBuilderComponent, Theme } from '@/types';
-import { getThemeClasses } from '@/utils';
-
+import Container from '@/components/Container/Container'
 interface HeroProps extends CustomBuilderComponent {
 	title: string;
 	description?: string;
@@ -14,13 +13,15 @@ export default function Hero({
 	theme = 'primary',
 }: HeroProps) {
 	return (
-		<section className={getThemeClasses(theme).theme}>
-			<div className={styles['hero-container']}>
-				<h2 className={styles['hero-title']}>{title}</h2>
-				{description &&
-					<p className={styles['hero-description']}>{description}</p>
-				}
-			</div>
-		</section>
+		<Container
+			className={styles['hero-container']}
+			theme={theme}
+			element='section'
+		>
+			<h2 className={styles['hero-title']}>{title}</h2>
+			{description &&
+				<p className={styles['hero-description']}>{description}</p>
+			}
+		</Container>
 	)
 }

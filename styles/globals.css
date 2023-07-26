@@ -19,3 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+.global {
+  @apply text-primaryText bg-secondary hover:bg-secondaryDark bg-primary text-secondaryText hover:bg-primaryDark bg-tertiary text-secondaryText hover:bg-tertiaryDark bg-accent text-secondaryText hover:bg-accentDark;
+}

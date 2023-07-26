@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './ContentSection.module.css'
 import { CustomBuilderComponent, Theme } from '@/types';
-import { getThemeClasses } from '@/utils';
 import {BuilderBlocks, BuilderElement, withChildren } from '@builder.io/react';
+import ThemeWrapper from '../ThemeWrapper';
 
 interface ContentSectionProps extends CustomBuilderComponent {
 	title: BuilderElement[];
@@ -17,7 +17,7 @@ export default function ContentSection({
 }
 : ContentSectionProps) {
 	return (
-		<section className={theme ? getThemeClasses(theme).theme : undefined}>
+		<ThemeWrapper element='section'>
 			<div className={styles['contentSection-container']}>
 				<div className={styles['contentSection-title']}>
 					<BuilderBlocks
@@ -30,7 +30,7 @@ export default function ContentSection({
 					<p className={styles['contentSection-description']}>{description}</p>
 				}
 			</div>
-		</section>
+		</ThemeWrapper>
 	)
 }
 

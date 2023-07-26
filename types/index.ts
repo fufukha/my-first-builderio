@@ -9,6 +9,14 @@ export enum Model {
 	Navigation = 'navigation-links'
 }
 
+export interface CustomLink {
+	image?: string;
+	label?: string;
+	url?: string;
+	behavior?: '_self' | '_blank',
+	externalLink?: boolean;
+}
+
 export type GenericBuilderContent = BuilderContent 
 
 interface PageDataFields {
@@ -19,16 +27,11 @@ interface PageDataFields {
 interface NavLinkDataFields {
 	label: string;
 	url: string;
-	behavior: '_self' | '_blank';
+	behavior: LinkBehavior;
 	externalLink: boolean;
 }
 
-interface NavigationLink {
-	image: string;
-	label: string;
-	url: string;
-	behavior: '_self' | '_blank',
-	externalLink: boolean;
+interface NavigationLink extends CustomLink {
 	children: NavigationLinkBuilderContent;
 }
 interface NavigationLinksDataFields {
@@ -48,6 +51,9 @@ export interface PageBuilderContent extends BuilderContent {
 
 export const theme = ['primary', 'secondary', 'tertiary', 'accent'] as const
 export type Theme = typeof theme[number]
+
+export const linkBehavior = ['_self', '_blank'] as const
+export type LinkBehavior = typeof linkBehavior[number]
 
 export interface BuilderChild {
 	readonly $$typeof: string;

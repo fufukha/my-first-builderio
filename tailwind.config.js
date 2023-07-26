@@ -14,7 +14,11 @@ module.exports = {
         accent: '#c2f929',
         black: '#030e12',
         primaryText: '#030e12',
-        secondaryText: '#fff'
+        secondaryText: '#fff',
+        primaryDark: '#0d1ca2',
+        secondaryDark: '#bbccd2',
+        tertiaryDark: '#0071ab',
+        accentDark: '#a2d021',
       }
     },
   },

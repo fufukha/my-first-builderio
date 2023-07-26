@@ -5,6 +5,7 @@ import MainFooter from '../MainFooter/MainFooter'
 import { BuilderComponent } from '@builder.io/react'
 import { PageProps } from '@/pages/[[...page]]'
 import { Model } from '@/types'
+import Button from '@/components/Button/Button'
 
 export interface MainLayoutProps {
 	navLinks: PageProps['navLinks'];
