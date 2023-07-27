@@ -35,6 +35,56 @@ Builder.registerComponent(
 )
 
 Builder.registerComponent(
+  dynamic(() => import('@/components/Card/Card')),
+  // dynamic(() => import('@/components/Card/Card').then((module) => module.CardWithChildren)),
+  {
+    name: 'Card',
+    inputs: [
+			{name: 'eyebrow', type: 'text'},
+			{name: 'title', type: 'text', defaultValue: 'Title'},
+			{name: 'description', type: 'text'},
+			{name: 'theme', type: 'text', enum: theme as unknown as string[], defaultValue: theme[0]},
+			{
+				name: 'action',
+				type: 'blocks', // Specify type of blocks
+				hideFromUI: true,
+				helperText: 'This is an editable region.',
+				defaultValue: [
+					{
+						'@type': '@builder.io/sdk:Element',
+							component: {
+								name: 'Text',
+								options: {
+									text: 'Edit title...',
+							},
+						},
+						responsiveStyles: {
+							large: {
+								// Styles for the editable section
+							},
+						},
+					},
+				],
+			},
+		],
+		defaultStyles: {
+			margin: '0',
+		},
+		// noWrap: true,
+		// canHaveChildren: true,
+		// childRequirements: {
+		// 	message: 'You can only a Button',
+		// 	query: {
+		// 		// 'children.length': {$lte: 1},
+		// 		'component.name': { $in: ['Button'] },
+		// 	},
+		// },
+    image: 'https://tabler-icons.io/static/tabler-icons/icons-png/new-section.png'
+  }
+)
+
+
+Builder.registerComponent(
   dynamic(() => import('@/components/ContentSection/ContentSection')),
 	// ContentSectionWithChildren,
   {
@@ -87,7 +137,7 @@ Builder.registerComponent(
 			margin: '0',
 		},
 		canHaveChildren: true,
-		noWrap: true,
+		// noWrap: true,
     image: 'https://tabler-icons.io/static/tabler-icons/icons-png/container.png'
   }
 )

@@ -34,4 +34,4 @@ export default function ContentSection({
 	)
 }
 
-export const ContentSectionWithChildren = withChildren(ContentSection);
+// export const ContentSectionWithChildren = withChildren(ContentSection);
