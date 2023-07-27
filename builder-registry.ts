@@ -49,22 +49,6 @@ Builder.registerComponent(
 				type: 'blocks', // Specify type of blocks
 				hideFromUI: true,
 				helperText: 'This is an editable region.',
-				defaultValue: [
-					{
-						'@type': '@builder.io/sdk:Element',
-							component: {
-								name: 'Text',
-								options: {
-									text: 'Edit title...',
-							},
-						},
-						responsiveStyles: {
-							large: {
-								// Styles for the editable section
-							},
-						},
-					},
-				],
 			},
 		],
 		defaultStyles: {
